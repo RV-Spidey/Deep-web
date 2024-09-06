@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,11 +21,9 @@
             padding: 20px;
             border-right: 1px solid #3a3a3a; /* Slightly lighter grey border */
             transition: width 0.3s; /* Smooth transition for resizing */
-            overflow: hidden; /* Hide content when minimized */
         }
         .sidebar.minimized {
-            width: 30px; /* Show only the three dots when minimized */
-            padding: 0; /* Remove padding when minimized */
+            width: 50px; /* Reduced width when minimized */
         }
         .sidebar .minimize-btn {
             display: block;
@@ -40,11 +39,11 @@
             background-color: #666;
         }
         .sidebar .minimize-btn:before {
-            content: '⋮'; /* Three dots for minimizing/maximizing */
-            font-size: 20px;
+            content: '◀'; /* Arrow for minimizing */
+            font-size: 16px;
         }
         .sidebar.minimized .minimize-btn:before {
-            content: '⋮'; /* Three dots for maximizing */
+            content: '▶'; /* Arrow for maximizing */
         }
         .sidebar .module-list {
             display: block;
@@ -56,11 +55,9 @@
             margin-left: 200px;
             padding: 20px;
             transition: margin-left 0.3s; /* Smooth transition for content shifting */
-            display: flex;
-            justify-content: space-between; /* For aligning image and video modules side by side */
         }
         .content.sidebar-minimized {
-            margin-left: 50px; /* Adjust margin when sidebar is minimized */
+            margin-left: 60px; /* Adjust margin when sidebar is minimized */
         }
         .video-frame {
             width: 100%; /* Full width */
@@ -105,18 +102,7 @@
         .video-section.active {
             display: block; /* Show video section when active */
         }
-        /* Image Section */
-        .image-section {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .image-section img {
-            max-width: 100%; /* Ensure image is responsive */
-            height: auto;
-            border: 1px solid #444; /* Border for the image */
-        }
-        
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .sidebar {
@@ -126,11 +112,10 @@
                 border-right: none;
             }
             .sidebar.minimized {
-                width: 30px; /* Full width when minimized */
+                width: 100%; /* Full width when minimized */
             }
             .content {
                 margin-left: 0;
-                flex-direction: column;
             }
             .video-frame {
                 height: 0;
@@ -156,19 +141,33 @@
     </div>
 
     <div class="content">
-        <div class="video-section">
-            <!-- Module content -->
-            <div id="module1" class="module video-section">
-                <h2>Module 1: Introduction</h2>
-                <div class="video-frame">
-                    <iframe id="video-frame-module1" src="" frameborder="0" allowfullscreen></iframe>
-                </div>
+        <!-- Module content -->
+        <div id="module1" class="module video-section">
+            <h2>Module 1: Introduction</h2>
+            <div class="video-frame">
+                <iframe id="video-frame-module1" src="" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
 
-        <!-- Image Section -->
-        <div class="image-section" id="imageSection">
-            <img src="![WhatsApp_Image_2024-09-06_at_21 40 34_08998d9f-removebg-preview](https://github.com/user-attachments/assets/cc718b44-7bc8-4501-8a7c-4db5f4eeb2ba)" alt="Welcome Image">
+        <div id="module2" class="module video-section">
+            <h2>Module 2: Basics</h2>
+            <div class="video-frame">
+                <iframe id="video-frame-module2" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="module3" class="module video-section">
+            <h2>Module 3: Advanced Topics</h2>
+            <div class="video-frame">
+                <iframe id="video-frame-module3" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+        <div id="module5" class="module video-section">
+            <h2>Module 5</h2>
+            <div class="video-frame">
+                <iframe id="video-frame-module5" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 
@@ -195,9 +194,6 @@
         };
 
         function showModule(moduleId) {
-            // Hide the image section on module selection
-            document.getElementById('imageSection').style.display = 'none';
-
             // Hide all modules and reset video list
             const modules = document.querySelectorAll('.video-section');
             modules.forEach(module => module.classList.remove('active'));
