@@ -52,6 +52,13 @@
             border-bottom: 2px solid #3a3a3a; /* Lighter grey border for headings */
             padding-bottom: 5px;
         }
+        .video-list {
+            display: none; /* Hide video list by default */
+            margin-top: 10px;
+        }
+        .video-list.active {
+            display: block; /* Show video list when active */
+        }
     </style>
 </head>
 <body>
@@ -59,10 +66,10 @@
     <div class="sidebar">
         <h2>Course Modules</h2>
         <ul class="module-list">
-            <li><a href="#module1">Module 1: Introduction</a></li>
-            <li><a href="#module2">Module 2: Basics</a></li>
-            <li><a href="#module3">Module 3: Advanced Topics</a></li>
-            <li><a href="#module5">Module 5</a></li>
+            <li><a href="#" onclick="toggleVideos('module1')">Module 1: Introduction</a></li>
+            <li><a href="#" onclick="toggleVideos('module2')">Module 2: Basics</a></li>
+            <li><a href="#" onclick="toggleVideos('module3')">Module 3: Advanced Topics</a></li>
+            <li><a href="#" onclick="toggleVideos('module5')">Module 5</a></li>
         </ul>
     </div>
 
@@ -70,88 +77,64 @@
         <!-- Module 1: Multiple Videos -->
         <div id="module1" class="module">
             <h2>Module 1: Introduction</h2>
-            
-            <!-- Video 1 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID1" frameborder="0" allowfullscreen></iframe>
-            
-            <!-- Video 2 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID2" frameborder="0" allowfullscreen></iframe>
-            
-            <!-- Video 3 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID3" frameborder="0" allowfullscreen></iframe>
+            <div class="video-list">
+                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID1" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID2" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID3" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
 
         <!-- Module 2: Multiple Videos -->
         <div id="module2" class="module">
             <h2>Module 2: Basics</h2>
-            
-            <!-- Video 1 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID4" frameborder="0" allowfullscreen></iframe>
-            
-            <!-- Video 2 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID5" frameborder="0" allowfullscreen></iframe>
+            <div class="video-list">
+                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID4" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID5" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
 
         <!-- Module 3: Multiple Videos -->
         <div id="module3" class="module">
             <h2>Module 3: Advanced Topics</h2>
-            
-            <!-- Video 1 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID6" frameborder="0" allowfullscreen></iframe>
-            
-            <!-- Video 2 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID7" frameborder="0" allowfullscreen></iframe>
+            <div class="video-list">
+                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID6" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID7" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
         
+        <!-- Module 5: Multiple Videos -->
         <div id="module5" class="module">
             <h2>Module 5</h2>
-            
-            <!-- Video 1 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/3j6FnCR99Kc?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            
-            <!-- Video 2 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/7k6ghma44Ck?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 3 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/T13IaHt8dq0?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 4 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/5DMGtI9J4HI?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 5 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/I2IA6hyoZhs?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 6 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/Oq2TzoeX2Ro?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 7 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/f6bCgkeyFms?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 8 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/YOv4w70mQVc?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 9 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/_RHhaoueXZk?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 10 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/o6sd_qtWhnU?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 11 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/gbDO9CwJmKU?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 12 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/hANZI2mJnsQ?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 13 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/3NyGGQ2z4o8?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 14 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/WrfO89n8gkI?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 15 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/gfKWcTFxtnE?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 16 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/gfKWcTFxtnE?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 17 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/P5aMhrRTOtQ?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 18 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/oPqY3ZhX4IM?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 19 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/aWS_XujOD84?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            <!-- Video 20 -->
-            <iframe class="video-frame" src="https://www.youtube.com/embed/Ugtxb-OEA-8?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-            
+            <div class="video-list">
+                <iframe class="video-frame" src="https://www.youtube.com/embed/3j6FnCR99Kc?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/7k6ghma44Ck?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/T13IaHt8dq0?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/5DMGtI9J4HI?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/I2IA6hyoZhs?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/Oq2TzoeX2Ro?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/f6bCgkeyFms?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/YOv4w70mQVc?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/_RHhaoueXZk?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/o6sd_qtWhnU?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                <iframe class="video-frame" src="https://www.youtube.com/embed/gbDO9CwJmKU?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
+                <!-- Add more video if needed -->
+            </div>
         </div>
 
     </div>
 
+    <script>
+        function toggleVideos(moduleId) {
+            // Hide all video lists
+            const modules = document.querySelectorAll('.module .video-list');
+            modules.forEach(list => list.classList.remove('active'));
+
+            // Show the video list of the clicked module
+            const selectedModule = document.getElementById(moduleId);
+            const videoList = selectedModule.querySelector('.video-list');
+            videoList.classList.toggle('active');
+        }
+    </script>
+
 </body>
 </html>
-
