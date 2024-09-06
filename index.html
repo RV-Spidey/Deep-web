@@ -24,14 +24,6 @@
             margin-left: 260px;
             padding: 20px;
         }
-        .video-section {
-            display: none; /* Hide video section by default */
-            display: flex; /* Enable Flexbox */
-            flex-direction: column; /* Align items vertically */
-            align-items: center; /* Center items horizontally */
-            justify-content: center; /* Center items vertically */
-            height: 100%; /* Full height of content area */
-        }
         .video-frame {
             width: 1012.8px; /* Width for 4:3 ratio */
             height: 759.6px; /* Height for 4:3 ratio */
@@ -60,8 +52,11 @@
             border-bottom: 2px solid #3a3a3a; /* Lighter grey border for headings */
             padding-bottom: 5px;
         }
+        .video-section {
+            display: none; /* Hide video section by default */
+        }
         .video-section.active {
-            display: flex; /* Show video section with Flexbox */
+            display: block; /* Show video section when active */
         }
     </style>
 </head>
