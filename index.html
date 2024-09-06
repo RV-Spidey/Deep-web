@@ -20,9 +20,11 @@
             padding: 20px;
             border-right: 1px solid #3a3a3a; /* Slightly lighter grey border */
             transition: width 0.3s; /* Smooth transition for resizing */
+            overflow: hidden; /* Hide content when minimized */
         }
         .sidebar.minimized {
-            width: 50px; /* Reduced width when minimized */
+            width: 30px; /* Show only the three dots when minimized */
+            padding: 0; /* Remove padding when minimized */
         }
         .sidebar .minimize-btn {
             display: block;
@@ -38,11 +40,11 @@
             background-color: #666;
         }
         .sidebar .minimize-btn:before {
-            content: '◀'; /* Arrow for minimizing */
-            font-size: 16px;
+            content: '⋮'; /* Three dots for minimizing/maximizing */
+            font-size: 20px;
         }
         .sidebar.minimized .minimize-btn:before {
-            content: '▶'; /* Arrow for maximizing */
+            content: '⋮'; /* Three dots for maximizing */
         }
         .sidebar .module-list {
             display: block;
@@ -56,7 +58,7 @@
             transition: margin-left 0.3s; /* Smooth transition for content shifting */
         }
         .content.sidebar-minimized {
-            margin-left: 60px; /* Adjust margin when sidebar is minimized */
+            margin-left: 50px; /* Adjust margin when sidebar is minimized */
         }
         .video-frame {
             width: 100%; /* Full width */
@@ -111,7 +113,7 @@
                 border-right: none;
             }
             .sidebar.minimized {
-                width: 100%; /* Full width when minimized */
+                width: 30px; /* Full width when minimized */
             }
             .content {
                 margin-left: 0;
@@ -235,4 +237,3 @@
     </script>
 
 </body>
-</html>
