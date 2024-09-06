@@ -130,6 +130,11 @@
                 padding-bottom: 56.25%; /* 16:9 aspect ratio */
             }
         }
+        #autoCloseImage {
+            display: block;
+            width: 300px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -151,7 +156,6 @@
 
     <div class="content">
         <div id="current-class-number" class="current-class-number">Class Number</div>
-        <img id="repo-image" src="" alt="GitHub Image" style="max-width: 100%; height: auto; display: none;"/>
         <!-- Module content -->
         <div id="module1" class="module video-section">
             <h2>Module 1</h2>
@@ -187,97 +191,62 @@
                 <iframe id="video-frame-module5" src="" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
+
+        <!-- Auto-close image section -->
+        <img id="autoCloseImage" src="https://github.com/RV-Spidey/my-course-page/main/images/WhatsApp_Image_2024-09-06_at_21.40.34_08998d9f-removebg-preview.png" alt="celebrate">
+
     </div>
 
     <script>
         const moduleVideos = {
-            module1: [
-                // Add videos here
-            ],
-            module2: [
-                // Add videos here
-            ],
-            module3: [
-                // Add videos here
-            ],
-            module4: [
-                // Add videos here
-            ],
+            module1: [],
+            module2: [],
+            module3: [],
+            module4: [],
             module5: [
                 { id: '3j6FnCR99Kc', title: 'Class 1' },
                 { id: '7k6ghma44Ck', title: 'Class 2' },
                 { id: 'T13IaHt8dq0', title: 'Class 3' },
-                { id: '5DMGtI9J4HI', title: 'Class 4' },
-                { id: 'I2IA6hyoZhs', title: 'Class 5' },
-                { id: 'Oq2TzoeX2Ro', title: 'Class 6' },
-                { id: 'f6bCgkeyFms', title: 'Class 7' },
-                { id: 'YOv4w70mQVc', title: 'Class 8' },
-                { id: '_RHhaoueXZk', title: 'Class 9' },
-                { id: 'o6sd_qtWhnU', title: 'Class 10' },
-                { id: 'gbDO9CwJmKU', title: 'Class 11' },
-                { id: 'hANZI2mJnsQ', title: 'Class 12' },
-                { id: '3NyGGQ2z4o8', title: 'Class 13' },
-                { id: 'WrfO89n8gkI', title: 'Class 14' },
-                { id: 'gfKWcTFxtnE', title: 'Class 15' },
-                { id: 'HTQQp0utgfM', title: 'Class 16' },
-                { id: 'rD18s6Z18sI', title: 'Class 17' },
-                { id: 'U-1GyM09RFY', title: 'Class 18' },
-                { id: 'X30HyaGm4AA', title: 'Class 19' },
-                { id: 'D8cYRD3s7-s', title: 'Class 20' },
-                { id: 'tGRC1vWzkhw', title: 'Class 21' },
-                { id: 'c97jV1-VFZ0', title: 'Class 22' },
-                { id: '2kVPv1mfJ4A', title: 'Class 23' },
-                { id: 'FbdtKcD9gS4', title: 'Class 24' },
-                { id: 'Te_sVrDO4Xs', title: 'Class 25' },
-                { id: 'S_hvlIRpT5I', title: 'Class 26' },
-                { id: 'UsF1F8bQLD8', title: 'Class 27' },
-                { id: 'LReHRHyDkhY', title: 'Class 28' },
-                { id: 'q9gWwYf7Quo', title: 'Class 29' },
-                { id: '58W63YgbHwU', title: 'Class 30' }
+                // Add more video classes here...
             ]
         };
 
         function showModule(moduleId) {
-            // Hide all modules
             const modules = document.querySelectorAll('.video-section');
-            modules.forEach(module => {
-                module.classList.remove('active');
-            });
-            
-            // Show the selected module
-            const activeModule = document.getElementById(moduleId);
-            activeModule.classList.add('active');
+            modules.forEach(module => module.classList.remove('active'));
+            document.getElementById('video-list-section').innerHTML = '';
 
-            // Update video list based on selected module
+            const selectedModule = document.getElementById(moduleId);
+            selectedModule.classList.add('active');
+
+            const videoList = moduleVideos[moduleId];
             const videoListSection = document.getElementById('video-list-section');
-            videoListSection.innerHTML = ''; // Clear previous video list
+            const list = document.createElement('ul');
+            list.className = 'video-list';
 
-            const videos = moduleVideos[moduleId];
-            if (videos) {
-                const videoList = document.createElement('ul');
-                videoList.className = 'video-list';
+            videoList.forEach(video => {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = '#';
+                link.textContent = video.title;
+                link.onclick = () => loadVideo(video.id, moduleId, listItem);
+                listItem.appendChild(link);
+                list.appendChild(listItem);
+            });
 
-                videos.forEach(video => {
-                    const listItem = document.createElement('li');
-                    const link = document.createElement('a');
-                    link.href = '#';
-                    link.textContent = video.title;
-                    link.onclick = function() {
-                        showVideo(video.id, moduleId);
-                    };
-                    listItem.appendChild(link);
-                    videoList.appendChild(listItem);
-                });
-
-                videoListSection.appendChild(videoList);
-            }
+            videoListSection.appendChild(list);
         }
 
-        function showVideo(videoId, moduleId) {
-            const iframe = document.getElementById(`video-frame-${moduleId}`);
-            iframe.src = `https://www.youtube.com/embed/${videoId}`;
-            const currentClassNumber = document.getElementById('current-class-number');
-            currentClassNumber.textContent = `Class Number: ${videoId}`; // Update class number
+        function loadVideo(videoId, moduleId, listItem) {
+            const videoItems = document.querySelectorAll('.video-list li');
+            videoItems.forEach(item => item.classList.remove('active'));
+            listItem.classList.add('active');
+
+            const videoFrame = document.getElementById(video-frame-${moduleId});
+            videoFrame.src = https://www.youtube.com/embed/${videoId}?rel=0;
+
+            const classNumber = listItem.querySelector('a').textContent;
+            document.getElementById('current-class-number').textContent = Currently Playing: ${classNumber};
         }
 
         function toggleSidebar() {
@@ -287,12 +256,11 @@
             content.classList.toggle('sidebar-minimized');
         }
 
-        // Load the image when the page loads
-        window.onload = function() {
-            const repoImage = document.getElementById('repo-image');
-            repoImage.src = 'https://raw.githubusercontent.com/RV-Spidey/my-course-page/main/images/WhatsApp_Image_2024-09-06_at_21.40.34_08998d9f-removebg-preview.png'; // Update this to your image URL
-            repoImage.style.display = 'block'; // Make the image visible
-        };
+        // Auto-close image logic
+        setTimeout(() => {
+            document.getElementById('autoCloseImage').style.display = 'none';
+        }, 5000); // Hide image after 5 seconds
     </script>
+
 </body>
 </html>
