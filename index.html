@@ -44,6 +44,12 @@
         .sidebar.minimized .minimize-btn:before {
             content: '▶'; /* Arrow for maximizing */
         }
+        .sidebar .module-list {
+            display: block;
+        }
+        .sidebar.minimized .module-list {
+            display: none; /* Hide module list when minimized */
+        }
         .content {
             margin-left: 260px;
             padding: 20px;
