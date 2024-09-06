@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spidey</title>
     <style>
-        /* Existing CSS */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -14,7 +13,6 @@
             color: #e0e0e0; /* Light grey text color for contrast */
             display: none; /* Hide body by default */
         }
-        /* Additional styles for the login form */
         .login-form {
             position: fixed;
             top: 50%;
@@ -77,7 +75,6 @@
 
     <div class="content">
         <div id="current-class-number" class="current-class-number"></div>
-        <!-- Module content -->
         <div id="module1" class="module video-section">
             <h2>Module 1</h2>
             <div class="video-frame">
@@ -182,16 +179,11 @@
             const videoList = moduleVideos[moduleId];
             const videoListSection = document.getElementById('video-list-section');
             const list = document.createElement('ul');
-            list.className = 'video-list';
+            list.classList.add('video-list');
 
             videoList.forEach(video => {
                 const listItem = document.createElement('li');
-                listItem.classList.add('video-item');
-                const link = document.createElement('a');
-                link.href = '#';
-                link.textContent = video.title;
-                link.onclick = () => loadVideo(video.id, moduleId, listItem);
-                listItem.appendChild(link);
+                listItem.innerHTML = `<a href="#" onclick="loadVideo('${video.id}', '${moduleId}', this)">${video.title}</a>`;
                 list.appendChild(listItem);
             });
 
