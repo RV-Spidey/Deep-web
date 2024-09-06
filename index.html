@@ -30,19 +30,19 @@
             margin-bottom: 20px;
             border: 1px solid #444; /* Border color for the video frames */
         }
-        .module-list {
+        .module-list, .video-list {
             list-style-type: none;
             padding: 0;
         }
-        .module-list li {
+        .module-list li, .video-list li {
             padding: 10px;
             border-bottom: 1px solid #3a3a3a; /* Lighter grey border for items */
         }
-        .module-list li a {
+        .module-list li a, .video-list li a {
             text-decoration: none;
             color: #e0e0e0; /* Light grey text color for links */
         }
-        .module-list li a:hover {
+        .module-list li a:hover, .video-list li a:hover {
             color: #007BFF; /* Highlight color on hover */
         }
         .module {
@@ -52,12 +52,11 @@
             border-bottom: 2px solid #3a3a3a; /* Lighter grey border for headings */
             padding-bottom: 5px;
         }
-        .video-list {
-            display: none; /* Hide video list by default */
-            margin-top: 10px;
+        .video-section {
+            display: none; /* Hide video section by default */
         }
-        .video-list.active {
-            display: block; /* Show video list when active */
+        .video-section.active {
+            display: block; /* Show video section when active */
         }
     </style>
 </head>
@@ -66,75 +65,79 @@
     <div class="sidebar">
         <h2>Course Modules</h2>
         <ul class="module-list">
-            <li><a href="#" onclick="toggleVideos('module1')">Module 1: Introduction</a></li>
-            <li><a href="#" onclick="toggleVideos('module2')">Module 2: Basics</a></li>
-            <li><a href="#" onclick="toggleVideos('module3')">Module 3: Advanced Topics</a></li>
-            <li><a href="#" onclick="toggleVideos('module5')">Module 5</a></li>
+            <li><a href="#" onclick="showModule('module1')">Module 1: Introduction</a></li>
+            <li><a href="#" onclick="showModule('module2')">Module 2: Basics</a></li>
+            <li><a href="#" onclick="showModule('module3')">Module 3: Advanced Topics</a></li>
+            <li><a href="#" onclick="showModule('module5')">Module 5</a></li>
         </ul>
     </div>
 
     <div class="content">
-        <!-- Module 1: Multiple Videos -->
-        <div id="module1" class="module">
+        <!-- Module 1 -->
+        <div id="module1" class="module video-section">
             <h2>Module 1: Introduction</h2>
-            <div class="video-list">
-                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID1" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID2" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID3" frameborder="0" allowfullscreen></iframe>
-            </div>
+            <ul class="video-list">
+                <li><a href="#" onclick="loadVideo('YOUR_VIDEO_ID1')">Video 1</a></li>
+                <li><a href="#" onclick="loadVideo('YOUR_VIDEO_ID2')">Video 2</a></li>
+                <li><a href="#" onclick="loadVideo('YOUR_VIDEO_ID3')">Video 3</a></li>
+            </ul>
+            <iframe id="video-frame" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <!-- Module 2: Multiple Videos -->
-        <div id="module2" class="module">
+        <!-- Module 2 -->
+        <div id="module2" class="module video-section">
             <h2>Module 2: Basics</h2>
-            <div class="video-list">
-                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID4" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID5" frameborder="0" allowfullscreen></iframe>
-            </div>
+            <ul class="video-list">
+                <li><a href="#" onclick="loadVideo('YOUR_VIDEO_ID4')">Video 1</a></li>
+                <li><a href="#" onclick="loadVideo('YOUR_VIDEO_ID5')">Video 2</a></li>
+            </ul>
+            <iframe id="video-frame" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <!-- Module 3: Multiple Videos -->
-        <div id="module3" class="module">
+        <!-- Module 3 -->
+        <div id="module3" class="module video-section">
             <h2>Module 3: Advanced Topics</h2>
-            <div class="video-list">
-                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID6" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID7" frameborder="0" allowfullscreen></iframe>
-            </div>
+            <ul class="video-list">
+                <li><a href="#" onclick="loadVideo('YOUR_VIDEO_ID6')">Video 1</a></li>
+                <li><a href="#" onclick="loadVideo('YOUR_VIDEO_ID7')">Video 2</a></li>
+            </ul>
+            <iframe id="video-frame" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
         </div>
         
-        <!-- Module 5: Multiple Videos -->
-        <div id="module5" class="module">
+        <!-- Module 5 -->
+        <div id="module5" class="module video-section">
             <h2>Module 5</h2>
-            <div class="video-list">
-                <iframe class="video-frame" src="https://www.youtube.com/embed/3j6FnCR99Kc?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/7k6ghma44Ck?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/T13IaHt8dq0?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/5DMGtI9J4HI?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/I2IA6hyoZhs?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/Oq2TzoeX2Ro?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/f6bCgkeyFms?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/YOv4w70mQVc?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/_RHhaoueXZk?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/o6sd_qtWhnU?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-                <iframe class="video-frame" src="https://www.youtube.com/embed/gbDO9CwJmKU?rel=0&controls=1" frameborder="0" allowfullscreen></iframe>
-                <!-- Add more video if needed -->
-            </div>
+            <ul class="video-list">
+                <li><a href="#" onclick="loadVideo('3j6FnCR99Kc')">Class 1</a></li>
+                <li><a href="#" onclick="loadVideo('7k6ghma44Ck')">Class 2</a></li>
+                <li><a href="#" onclick="loadVideo('T13IaHt8dq0')">Class 3</a></li>
+                <!-- Add more videos if needed -->
+            </ul>
+            <iframe id="video-frame" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
         </div>
 
     </div>
 
     <script>
-        function toggleVideos(moduleId) {
-            // Hide all video lists
-            const modules = document.querySelectorAll('.module .video-list');
-            modules.forEach(list => list.classList.remove('active'));
+        function showModule(moduleId) {
+            // Hide all modules
+            const modules = document.querySelectorAll('.video-section');
+            modules.forEach(module => module.classList.remove('active'));
 
-            // Show the video list of the clicked module
+            // Show the selected module
             const selectedModule = document.getElementById(moduleId);
-            const videoList = selectedModule.querySelector('.video-list');
-            videoList.classList.toggle('active');
+            selectedModule.classList.add('active');
+
+            // Reset the video frame
+            document.getElementById('video-frame').src = '';
+        }
+
+        function loadVideo(videoId) {
+            const videoFrame = document.getElementById('video-frame');
+            videoFrame.src = `https://www.youtube.com/embed/${videoId}`;
         }
     </script>
 
 </body>
 </html>
+
