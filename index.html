@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -152,6 +151,7 @@
 
     <div class="content">
         <div id="current-class-number" class="current-class-number">Class Number</div>
+        <img id="repo-image" src="" alt="GitHub Image" style="max-width: 100%; height: auto; display: none;"/>
         <!-- Module content -->
         <div id="module1" class="module video-section">
             <h2>Module 1</h2>
@@ -219,57 +219,65 @@
                 { id: '3NyGGQ2z4o8', title: 'Class 13' },
                 { id: 'WrfO89n8gkI', title: 'Class 14' },
                 { id: 'gfKWcTFxtnE', title: 'Class 15' },
-                { id: 'WrfO89n8gkI', title: 'Class 16' },
-                { id: 'P5aMhrRTOtQ', title: 'Class 17' },
-                { id: 'oPqY3ZhX4IM', title: 'Class 18' },
-                { id: 'aWS_XujOD84', title: 'Class 19' },
-                { id: 'Ugtxb-OEA-8', title: 'Class 20' },
+                { id: 'HTQQp0utgfM', title: 'Class 16' },
+                { id: 'rD18s6Z18sI', title: 'Class 17' },
+                { id: 'U-1GyM09RFY', title: 'Class 18' },
+                { id: 'X30HyaGm4AA', title: 'Class 19' },
+                { id: 'D8cYRD3s7-s', title: 'Class 20' },
+                { id: 'tGRC1vWzkhw', title: 'Class 21' },
+                { id: 'c97jV1-VFZ0', title: 'Class 22' },
+                { id: '2kVPv1mfJ4A', title: 'Class 23' },
+                { id: 'FbdtKcD9gS4', title: 'Class 24' },
+                { id: 'Te_sVrDO4Xs', title: 'Class 25' },
+                { id: 'S_hvlIRpT5I', title: 'Class 26' },
+                { id: 'UsF1F8bQLD8', title: 'Class 27' },
+                { id: 'LReHRHyDkhY', title: 'Class 28' },
+                { id: 'q9gWwYf7Quo', title: 'Class 29' },
+                { id: '58W63YgbHwU', title: 'Class 30' }
             ]
         };
 
         function showModule(moduleId) {
-            // Hide all modules and reset video list
+            // Hide all modules
             const modules = document.querySelectorAll('.video-section');
-            modules.forEach(module => module.classList.remove('active'));
-            document.getElementById('video-list-section').innerHTML = '';
-
-            // Show the selected module
-            const selectedModule = document.getElementById(moduleId);
-            selectedModule.classList.add('active');
-
-            // Populate video list for the selected module
-            const videoList = moduleVideos[moduleId];
-            const videoListSection = document.getElementById('video-list-section');
-            const list = document.createElement('ul');
-            list.className = 'video-list';
-
-            videoList.forEach(video => {
-                const listItem = document.createElement('li');
-                listItem.classList.add('video-item'); // Add class for item styling
-                const link = document.createElement('a');
-                link.href = '#';
-                link.textContent = video.title;
-                link.onclick = () => loadVideo(video.id, moduleId, listItem);
-                listItem.appendChild(link);
-                list.appendChild(listItem);
+            modules.forEach(module => {
+                module.classList.remove('active');
             });
+            
+            // Show the selected module
+            const activeModule = document.getElementById(moduleId);
+            activeModule.classList.add('active');
 
-            videoListSection.appendChild(list);
+            // Update video list based on selected module
+            const videoListSection = document.getElementById('video-list-section');
+            videoListSection.innerHTML = ''; // Clear previous video list
+
+            const videos = moduleVideos[moduleId];
+            if (videos) {
+                const videoList = document.createElement('ul');
+                videoList.className = 'video-list';
+
+                videos.forEach(video => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.textContent = video.title;
+                    link.onclick = function() {
+                        showVideo(video.id, moduleId);
+                    };
+                    listItem.appendChild(link);
+                    videoList.appendChild(listItem);
+                });
+
+                videoListSection.appendChild(videoList);
+            }
         }
 
-        function loadVideo(videoId, moduleId, listItem) {
-            // Highlight the selected video
-            const videoItems = document.querySelectorAll('.video-list li');
-            videoItems.forEach(item => item.classList.remove('active'));
-            listItem.classList.add('active');
-
-            // Update the video frame
-            const videoFrame = document.getElementById(`video-frame-${moduleId}`);
-            videoFrame.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
-
-            // Update the class number
-            const classNumber = listItem.querySelector('a').textContent;
-            document.getElementById('current-class-number').textContent = `Currently Playing: ${classNumber}`;
+        function showVideo(videoId, moduleId) {
+            const iframe = document.getElementById(`video-frame-${moduleId}`);
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            const currentClassNumber = document.getElementById('current-class-number');
+            currentClassNumber.textContent = `Class Number: ${videoId}`; // Update class number
         }
 
         function toggleSidebar() {
@@ -278,8 +286,13 @@
             sidebar.classList.toggle('minimized');
             content.classList.toggle('sidebar-minimized');
         }
-    </script>
 
+        // Load the image when the page loads
+        window.onload = function() {
+            const repoImage = document.getElementById('repo-image');
+            repoImage.src = 'https://raw.githubusercontent.com/RV-Spidey/my-course-page/main/images/WhatsApp_Image_2024-09-06_at_21.40.34_08998d9f-removebg-preview.png'; // Update this to your image URL
+            repoImage.style.display = 'block'; // Make the image visible
+        };
+    </script>
 </body>
 </html>
-
