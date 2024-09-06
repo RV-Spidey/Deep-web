@@ -79,22 +79,22 @@
         <!-- Module content -->
         <div id="module1" class="module video-section">
             <h2>Module 1: Introduction</h2>
-            <iframe id="video-frame" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+            <iframe id="video-frame-module1" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
         </div>
 
         <div id="module2" class="module video-section">
             <h2>Module 2: Basics</h2>
-            <iframe id="video-frame" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+            <iframe id="video-frame-module2" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
         </div>
 
         <div id="module3" class="module video-section">
             <h2>Module 3: Advanced Topics</h2>
-            <iframe id="video-frame" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+            <iframe id="video-frame-module3" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
         </div>
         
         <div id="module5" class="module video-section">
             <h2>Module 5</h2>
-            <iframe id="video-frame" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+            <iframe id="video-frame-module5" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 
@@ -141,7 +141,7 @@
                 const link = document.createElement('a');
                 link.href = '#';
                 link.textContent = video.title;
-                link.onclick = () => loadVideo(video.id);
+                link.onclick = () => loadVideo(video.id, moduleId);
                 listItem.appendChild(link);
                 list.appendChild(listItem);
             });
@@ -149,12 +149,13 @@
             videoListSection.appendChild(list);
         }
 
-        function loadVideo(videoId) {
-            const videoFrame = document.getElementById('video-frame');
+        function loadVideo(videoId, moduleId) {
+            const videoFrame = document.getElementById(`video-frame-${moduleId}`);
             videoFrame.src = `https://www.youtube.com/embed/${videoId}`;
         }
     </script>
 
 </body>
 </html>
+
 
