@@ -14,13 +14,13 @@
         }
         .sidebar {
             width: 180px;
-            height: 100vh; /* Full viewport height */
+            height: 100vh;
             position: fixed;
             background-color: #2c2c2c; /* Medium dark grey for sidebar */
             padding: 20px;
             border-right: 1px solid #3a3a3a; /* Slightly lighter grey border */
+            overflow-y: auto; /* Make the sidebar scrollable */
             transition: width 0.3s; /* Smooth transition for resizing */
-            overflow-y: auto; /* Enable vertical scrolling */
         }
         .sidebar.minimized {
             width: 50px; /* Reduced width when minimized */
@@ -102,7 +102,15 @@
         .video-section.active {
             display: block; /* Show video section when active */
         }
-
+        .video-list li.active {
+            background-color: #444; /* Highlight color for the active video */
+            color: #e0e0e0; /* Text color for the active video */
+        }
+        .current-class-number {
+            font-size: 18px;
+            color: #e0e0e0;
+            margin-bottom: 20px; /* Space below the class number */
+        }
         /* Responsive Design */
         @media (max-width: 768px) {
             .sidebar {
@@ -142,6 +150,7 @@
     </div>
 
     <div class="content">
+        <div id="current-class-number" class="current-class-number">Class Number</div>
         <!-- Module content -->
         <div id="module1" class="module video-section">
             <h2>Module 1</h2>
@@ -190,6 +199,9 @@
             module3: [
                 // Add videos here
             ],
+            module4: [
+                // Add videos here
+            ],
             module5: [
                 { id: '3j6FnCR99Kc', title: 'Class 1' },
                 { id: '7k6ghma44Ck', title: 'Class 2' },
@@ -232,10 +244,11 @@
 
             videoList.forEach(video => {
                 const listItem = document.createElement('li');
+                listItem.classList.add('video-item'); // Add class for item styling
                 const link = document.createElement('a');
                 link.href = '#';
                 link.textContent = video.title;
-                link.onclick = () => loadVideo(video.id, moduleId);
+                link.onclick = () => loadVideo(video.id, moduleId, listItem);
                 listItem.appendChild(link);
                 list.appendChild(listItem);
             });
@@ -243,9 +256,19 @@
             videoListSection.appendChild(list);
         }
 
-        function loadVideo(videoId, moduleId) {
+        function loadVideo(videoId, moduleId, listItem) {
+            // Highlight the selected video
+            const videoItems = document.querySelectorAll('.video-list li');
+            videoItems.forEach(item => item.classList.remove('active'));
+            listItem.classList.add('active');
+
+            // Update the video frame
             const videoFrame = document.getElementById(`video-frame-${moduleId}`);
             videoFrame.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+
+            // Update the class number
+            const classNumber = listItem.querySelector('a').textContent;
+            document.getElementById('current-class-number').textContent = `Currently Playing: ${classNumber}`;
         }
 
         function toggleSidebar() {
