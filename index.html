@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +21,6 @@
             padding: 20px;
             border-right: 1px solid #3a3a3a; /* Slightly lighter grey border */
             transition: width 0.3s; /* Smooth transition for resizing */
-            overflow-y: auto; /* Add scrolling if content overflows */
         }
         .sidebar.minimized {
             width: 50px; /* Reduced width when minimized */
@@ -59,21 +59,48 @@
         .content.sidebar-minimized {
             margin-left: 60px; /* Adjust margin when sidebar is minimized */
         }
-        .video-list {
+        .video-frame {
+            width: 100%; /* Full width */
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            position: relative;
+            border: 1px solid #444; /* Border color for the video frames */
+        }
+        .video-frame iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .module-list, .video-list {
             list-style-type: none;
             padding: 0;
-            margin-top: 10px;
         }
-        .video-list li {
+        .module-list li, .video-list li {
             padding: 10px;
             border-bottom: 1px solid #3a3a3a; /* Lighter grey border for items */
         }
-        .video-list li a {
+        .module-list li a, .video-list li a {
             text-decoration: none;
             color: #e0e0e0; /* Light grey text color for links */
         }
-        .video-list li a:hover {
+        .module-list li a:hover, .video-list li a:hover {
             color: #007BFF; /* Highlight color on hover */
+        }
+        .module {
+            margin-bottom: 50px;
+        }
+        h2 {
+            border-bottom: 2px solid #3a3a3a; /* Lighter grey border for headings */
+            padding-bottom: 5px;
+        }
+        .video-section {
+            display: none; /* Hide video section by default */
+        }
+        .video-section.active {
+            display: block; /* Show video section when active */
         }
 
         /* Responsive Design */
@@ -90,6 +117,10 @@
             .content {
                 margin-left: 0;
             }
+            .video-frame {
+                height: 0;
+                padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            }
         }
     </style>
 </head>
@@ -99,19 +130,45 @@
         <button class="minimize-btn" onclick="toggleSidebar()"></button>
         <h2>Course Modules</h2>
         <ul class="module-list">
-            <li><a href="#" onclick="showModuleVideos('module1')">Module 1: Introduction</a></li>
-            <li><a href="#" onclick="showModuleVideos('module2')">Module 2: Basics</a></li>
-            <li><a href="#" onclick="showModuleVideos('module3')">Module 3: Advanced Topics</a></li>
-            <li><a href="#" onclick="showModuleVideos('module5')">Module 5</a></li>
+            <li><a href="#" onclick="showModule('module1')">Module 1: Introduction</a></li>
+            <li><a href="#" onclick="showModule('module2')">Module 2: Basics</a></li>
+            <li><a href="#" onclick="showModule('module3')">Module 3: Advanced Topics</a></li>
+            <li><a href="#" onclick="showModule('module5')">Module 5</a></li>
         </ul>
         <div id="video-list-section">
-            <!-- Video list for selected module will be injected here -->
+            <!-- Video list will be populated here based on selected module -->
         </div>
     </div>
 
     <div class="content">
-        <h2>Welcome to the Course</h2>
-        <p>Select a module to view its videos in the sidebar.</p>
+        <!-- Module content -->
+        <div id="module1" class="module video-section">
+            <h2>Module 1: Introduction</h2>
+            <div class="video-frame">
+                <iframe id="video-frame-module1" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="module2" class="module video-section">
+            <h2>Module 2: Basics</h2>
+            <div class="video-frame">
+                <iframe id="video-frame-module2" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="module3" class="module video-section">
+            <h2>Module 3: Advanced Topics</h2>
+            <div class="video-frame">
+                <iframe id="video-frame-module3" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+        <div id="module5" class="module video-section">
+            <h2>Module 5</h2>
+            <div class="video-frame">
+                <iframe id="video-frame-module5" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -136,13 +193,19 @@
             ]
         };
 
-        function showModuleVideos(moduleId) {
-            // Clear the previous video list
-            const videoListSection = document.getElementById('video-list-section');
-            videoListSection.innerHTML = '';
+        function showModule(moduleId) {
+            // Hide all modules and reset video list
+            const modules = document.querySelectorAll('.video-section');
+            modules.forEach(module => module.classList.remove('active'));
+            document.getElementById('video-list-section').innerHTML = '';
 
-            // Populate the new video list for the selected module
+            // Show the selected module
+            const selectedModule = document.getElementById(moduleId);
+            selectedModule.classList.add('active');
+
+            // Populate video list for the selected module
             const videoList = moduleVideos[moduleId];
+            const videoListSection = document.getElementById('video-list-section');
             const list = document.createElement('ul');
             list.className = 'video-list';
 
@@ -151,7 +214,7 @@
                 const link = document.createElement('a');
                 link.href = '#';
                 link.textContent = video.title;
-                link.onclick = () => loadVideo(video.id);
+                link.onclick = () => loadVideo(video.id, moduleId);
                 listItem.appendChild(link);
                 list.appendChild(listItem);
             });
@@ -159,10 +222,9 @@
             videoListSection.appendChild(list);
         }
 
-        function loadVideo(videoId) {
-            // Open video in a new tab or popup (you can adjust the behavior)
-            const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-            window.open(videoUrl, '_blank');
+        function loadVideo(videoId, moduleId) {
+            const videoFrame = document.getElementById(`video-frame-${moduleId}`);
+            videoFrame.src = `https://www.youtube.com/embed/${videoId}`;
         }
 
         function toggleSidebar() {
