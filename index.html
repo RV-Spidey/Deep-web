@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Page</title>
+    <title>Spidey</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -130,9 +130,10 @@
         <button class="minimize-btn" onclick="toggleSidebar()"></button>
         <h2>Course Modules</h2>
         <ul class="module-list">
-            <li><a href="#" onclick="showModule('module1')">Module 1: Introduction</a></li>
-            <li><a href="#" onclick="showModule('module2')">Module 2: Basics</a></li>
-            <li><a href="#" onclick="showModule('module3')">Module 3: Advanced Topics</a></li>
+            <li><a href="#" onclick="showModule('module1')">Module 1</a></li>
+            <li><a href="#" onclick="showModule('module2')">Module 2</a></li>
+            <li><a href="#" onclick="showModule('module3')">Module 3</a></li>
+            <li><a href="#" onclick="showModule('module4')">Module 4</a></li>
             <li><a href="#" onclick="showModule('module5')">Module 5</a></li>
         </ul>
         <div id="video-list-section">
@@ -143,23 +144,30 @@
     <div class="content">
         <!-- Module content -->
         <div id="module1" class="module video-section">
-            <h2>Module 1: Introduction</h2>
+            <h2>Module 1</h2>
             <div class="video-frame">
                 <iframe id="video-frame-module1" src="" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
 
         <div id="module2" class="module video-section">
-            <h2>Module 2: Basics</h2>
+            <h2>Module 2</h2>
             <div class="video-frame">
                 <iframe id="video-frame-module2" src="" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
 
         <div id="module3" class="module video-section">
-            <h2>Module 3: Advanced Topics</h2>
+            <h2>Module 3</h2>
             <div class="video-frame">
                 <iframe id="video-frame-module3" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+        <div id="module4" class="module video-section">
+            <h2>Module 4</h2>
+            <div class="video-frame">
+                <iframe id="video-frame-module4" src="" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
         
@@ -174,22 +182,35 @@
     <script>
         const moduleVideos = {
             module1: [
-                { id: '3j6FnCR99Kc', title: 'Video 1' },
-                { id: 'YOUR_VIDEO_ID2', title: 'Video 2' },
-                { id: 'YOUR_VIDEO_ID3', title: 'Video 3' }
+                
             ],
             module2: [
-                { id: 'YOUR_VIDEO_ID4', title: 'Video 1' },
-                { id: 'YOUR_VIDEO_ID5', title: 'Video 2' }
+                
             ],
             module3: [
-                { id: 'YOUR_VIDEO_ID6', title: 'Video 1' },
-                { id: 'YOUR_VIDEO_ID7', title: 'Video 2' }
+                
             ],
             module5: [
                 { id: '3j6FnCR99Kc', title: 'Class 1' },
                 { id: '7k6ghma44Ck', title: 'Class 2' },
-                { id: 'T13IaHt8dq0', title: 'Class 3' }
+                { id: 'T13IaHt8dq0', title: 'Class 3' },
+                { id: '5DMGtI9J4HI', title: 'Class 4' },
+                { id: 'I2IA6hyoZhs', title: 'Class 5' },
+                { id: 'Oq2TzoeX2Ro', title: 'Class 6' },
+                { id: 'f6bCgkeyFms', title: 'Class 7' },
+                { id: 'YOv4w70mQVc', title: 'Class 8' },
+                { id: '_RHhaoueXZk', title: 'Class 9' },
+                { id: 'o6sd_qtWhnU', title: 'Class 10' },
+                { id: 'gbDO9CwJmKU', title: 'Class 11' },
+                { id: 'hANZI2mJnsQ', title: 'Class 12' },
+                { id: '3NyGGQ2z4o8', title: 'Class 13' },
+                { id: 'WrfO89n8gkI', title: 'Class 14' },
+                { id: 'gfKWcTFxtnE', title: 'Class 15' },
+                { id: 'WrfO89n8gkI', title: 'Class 16' },
+                { id: 'P5aMhrRTOtQ', title: 'Class 17' },
+                { id: 'oPqY3ZhX4IM', title: 'Class 18' },
+                { id: 'aWS_XujOD84', title: 'Class 19' },
+                { id: 'Ugtxb-OEA-8', title: 'Class 20' },
             ]
         };
 
