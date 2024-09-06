@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
         }
 
         .sidebar {
-            width: 220px; /* Adjusted width to prevent text cutoff */
+            width: 200px;
             height: 100vh;
             position: fixed;
             background-color: #2c2c2c;
@@ -75,7 +76,7 @@
         }
 
         .content {
-            margin-left: 220px; /* Adjusted margin */
+            margin-left: 200px;
             padding: 20px;
             transition: margin-left 0.3s;
         }
@@ -125,9 +126,6 @@
         }
 
         h2 {
-            white-space: nowrap; /* Prevent text wrapping */
-            overflow: hidden;    /* Ensure it doesn't overflow */
-            text-overflow: ellipsis; /* Add ellipsis if the text is too long */
             border-bottom: 2px solid #3a3a3a;
             padding-bottom: 5px;
         }
@@ -185,35 +183,35 @@
     <div class="content">
         <!-- Module content -->
         <div id="module1" class="module video-section">
-            <h2>Module 1</h2>
+            <h2>            Module 1</h2>
             <div class="video-frame">
                 <iframe id="video-frame-module1" src="" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
 
         <div id="module2" class="module video-section">
-            <h2>Module 2</h2>
+            <h2>            Module 2</h2>
             <div class="video-frame">
                 <iframe id="video-frame-module2" src="" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
 
         <div id="module3" class="module video-section">
-            <h2>Module 3</h2>
+            <h2>            Module 3</h2>
             <div class="video-frame">
                 <iframe id="video-frame-module3" src="" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
         
         <div id="module4" class="module video-section">
-            <h2>Module 4</h2>
+            <h2>            Module 4</h2>
             <div class="video-frame">
                 <iframe id="video-frame-module4" src="" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
         
         <div id="module5" class="module video-section">
-            <h2>Module 5</h2>
+            <h2>            Module 5</h2>
             <div class="video-frame">
                 <iframe id="video-frame-module5" src="" frameborder="0" allowfullscreen></iframe>
             </div>
@@ -253,42 +251,43 @@
         function showModule(moduleId) {
             // Hide all modules and reset video list
             const modules = document.querySelectorAll('.video-section');
-            modules.forEach(module => {
-                module.classList.remove('active');
-            });
+            modules.forEach(module => module.classList.remove('active'));
+            document.getElementById('video-list-section').innerHTML = '';
 
-            const moduleElement = document.getElementById(moduleId);
-            if (moduleElement) {
-                moduleElement.classList.add('active');
+            // Show the selected module
+            const selectedModule = document.getElementById(moduleId);
+            selectedModule.classList.add('active');
+
+            // Highlight the selected module in the sidebar
+            const moduleLinks = document.querySelectorAll('.module-list li a');
+            moduleLinks.forEach(link => link.parentElement.classList.remove('highlight'));
+            const selectedLink = Array.from(moduleLinks).find(link => link.getAttribute('onclick').includes(moduleId));
+            if (selectedLink) {
+                selectedLink.parentElement.classList.add('highlight');
             }
 
-            populateVideoList(moduleId);
-        }
-
-        function populateVideoList(moduleId) {
+            // Populate video list for the selected module
+            const videoList = moduleVideos[moduleId];
             const videoListSection = document.getElementById('video-list-section');
-            videoListSection.innerHTML = ''; // Clear previous list
-
-            const videoList = moduleVideos[moduleId] || [];
-            const ul = document.createElement('ul');
-            ul.classList.add('video-list');
+            const list = document.createElement('ul');
+            list.className = 'video-list';
 
             videoList.forEach(video => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = '#';
-                a.innerText = video.title;
-                a.onclick = () => loadVideo(moduleId, video.id);
-                li.appendChild(a);
-                ul.appendChild(li);
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = '#';
+                link.textContent = video.title;
+                link.onclick = () => loadVideo(video.id, moduleId);
+                listItem.appendChild(link);
+                list.appendChild(listItem);
             });
 
-            videoListSection.appendChild(ul);
+            videoListSection.appendChild(list);
         }
 
-        function loadVideo(moduleId, videoId) {
-            const iframe = document.getElementById(`video-frame-${moduleId}`);
-            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+        function loadVideo(videoId, moduleId) {
+            const videoFrame = document.getElementById(`video-frame-${moduleId}`);
+            videoFrame.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
         }
 
         function toggleSidebar() {
@@ -297,9 +296,6 @@
             sidebar.classList.toggle('minimized');
             content.classList.toggle('sidebar-minimized');
         }
-
-        // Load the first module by default
-        showModule('module5');
     </script>
 
 </body>
