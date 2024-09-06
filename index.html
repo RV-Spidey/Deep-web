@@ -32,13 +32,27 @@
             padding: 20px;
             transition: margin-left 0.3s; /* Smooth transition for responsive change */
         }
-        .video-frame {
+        .video-container {
+            position: relative;
             width: 100%;
             max-width: 1012.8px; /* Maximum width for larger screens */
-            height: auto; /* Maintain aspect ratio */
-            aspect-ratio: 4 / 3; /* Maintain 4:3 aspect ratio */
+            height: auto;
             margin-bottom: 20px;
             border: 1px solid #444; /* Border color for the video frames */
+            background: #000; /* Background color for empty space */
+        }
+        .video-container::after {
+            content: "";
+            display: block;
+            padding-top: 75%; /* 4:3 Aspect Ratio */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
         .module-list, .video-list {
             list-style-type: none;
@@ -84,9 +98,8 @@
         }
 
         @media (max-width: 768px) {
-            .video-frame {
+            .video-container {
                 max-width: 100%; /* Full width on smaller screens */
-                height: auto; /* Maintain aspect ratio */
             }
         }
 
@@ -116,22 +129,30 @@
         <!-- Module content -->
         <div id="module1" class="module video-section">
             <h2>Module 1: Introduction</h2>
-            <iframe id="video-frame-module1" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+            <div class="video-container">
+                <iframe id="video-frame-module1" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
 
         <div id="module2" class="module video-section">
             <h2>Module 2: Basics</h2>
-            <iframe id="video-frame-module2" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+            <div class="video-container">
+                <iframe id="video-frame-module2" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
 
         <div id="module3" class="module video-section">
             <h2>Module 3: Advanced Topics</h2>
-            <iframe id="video-frame-module3" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+            <div class="video-container">
+                <iframe id="video-frame-module3" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
         
         <div id="module5" class="module video-section">
             <h2>Module 5</h2>
-            <iframe id="video-frame-module5" class="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+            <div class="video-container">
+                <iframe id="video-frame-module5" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 
