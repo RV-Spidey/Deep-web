@@ -192,7 +192,7 @@
     <script src="https://cdn.plyr.io/3.7.2/plyr.polyfilled.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const players = Array.from(document.querySelectorAll('.plyr__video-embed'));
+            const players = Array.from(document.querySelectorAll('.plyr__video-embed iframe'));
             players.forEach(player => new Plyr(player));
         });
 
@@ -242,6 +242,7 @@
                 list.appendChild(listItem);
             });
 
+            videoListSection.innerHTML = '';
             videoListSection.appendChild(list);
         }
 
