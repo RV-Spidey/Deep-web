@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -190,6 +189,37 @@
     </div>
 
     <script>
+        // Array of access codes
+        const accessCodes = [
+            "skibidi", "code2", "code3", "code4", "code5",
+            "code6", "code7", "code8", "code9", "code10",
+            "code11", "code12", "code13", "code14", "code15",
+            "code16", "code17", "code18", "code19", "code20",
+            "code21", "code22", "code23", "code24", "code25",
+            "code26", "code27", "code28", "code29", "code30",
+            "code31", "code32", "code33", "code34", "code35",
+            "code36", "code37", "code38", "code39", "code40",
+            "code41", "code42", "code43", "code44", "code45",
+            "code46", "code47", "code48", "code49", "code50",
+            "code51", "code52", "code53", "code54", "code55",
+            "code56", "code57", "code58", "code59", "code60",
+            "code61", "code62", "code63", "code64", "code65",
+            "code66", "code67", "code68", "code69", "code70",
+            "code71", "code72", "code73", "code74", "code75",
+            "code76", "code77", "code78", "code79", "code80",
+            "code81", "code82", "code83", "code84", "code85",
+            "code86", "code87", "code88", "code89", "code90",
+            "code91", "code92", "code93", "code94", "code95",
+            "code96", "code97", "code98", "code99", "code100"
+        ];
+
+        const userCode = prompt("Enter access code:");
+
+        if (!accessCodes.includes(userCode)) {
+            alert("Access denied. Incorrect code.");
+            window.location.href = "https://www.example.com"; // Redirect to another page
+        }
+
         const moduleVideos = {
             module1: [
                 // Add videos here
