@@ -150,7 +150,7 @@
     </div>
 
     <div class="content">
-        <div id="current-class-number" class="current-class-number">Class Number</div>
+        <div id="current-class-number" class="current-class-number"></div>
         <!-- Module content -->
         <div id="module1" class="module video-section">
             <h2>Module 1</h2>
@@ -191,7 +191,7 @@
     <script>
         // Object of access codes with usernames
         const accessCodes = {
-            "rihan123": "Rihan",
+            "skibidi": "User1",
             "code2": "User2",
             "code3": "User3",
             "code4": "User4",
@@ -234,10 +234,20 @@
                 { id: '5DMGtI9J4HI', title: 'Class 4' },
                 { id: 'I2IA6hyoZhs', title: 'Class 5' },
                 { id: 'Oq2TzoeX2Ro', title: 'Class 6' },
-                { id: 'cc_n39t83Rk', title: 'Class 7' },
-                { id: 'TZwLVl08', title: 'Class 8' },
-                { id: 'Q5b8wKqXRU4', title: 'Class 9' },
-                { id: '6CIVt49uJH4', title: 'Class 10' }
+                { id: 'f6bCgkeyFms', title: 'Class 7' },
+                { id: 'YOv4w70mQVc', title: 'Class 8' },
+                { id: '_RHhaoueXZk', title: 'Class 9' },
+                { id: 'o6sd_qtWhnU', title: 'Class 10' },
+                { id: 'gbDO9CwJmKU', title: 'Class 11' },
+                { id: 'hANZI2mJnsQ', title: 'Class 12' },
+                { id: '3NyGGQ2z4o8', title: 'Class 13' },
+                { id: 'WrfO89n8gkI', title: 'Class 14' },
+                { id: 'gfKWcTFxtnE', title: 'Class 15' },
+                { id: 'WrfO89n8gkI', title: 'Class 16' },
+                { id: 'P5aMhrRTOtQ', title: 'Class 17' },
+                { id: 'oPqY3ZhX4IM', title: 'Class 18' },
+                { id: 'aWS_XujOD84', title: 'Class 19' },
+                { id: 'Ugtxb-OEA-8', title: 'Class 20' },
             ],
         };
 
@@ -274,7 +284,7 @@
 
         function loadVideo(videoId, moduleId) {
             const iframe = document.getElementById(`video-frame-${moduleId}`);
-            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
         }
 
         let currentModule = 'module1'; // Set initial module
