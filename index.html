@@ -12,6 +12,14 @@
             background-color: #1a1a1a; /* Dark grey background */
             color: #e0e0e0; /* Light grey text color for contrast */
         }
+	.watermark {
+            position: fixed; /* fixed position to move freely */
+            opacity: 0.5; /* adjust the opacity to your liking */
+            font-size: 24px; /* adjust the font size to your liking */
+            color: #000; /* adjust the color to ensure visibility */
+            transform: rotate(-45deg); /* rotate the watermark for a slanted effect */
+            z-index: 2; /* ensure the watermark is on top */
+        }
         .sidebar {
             width: 180px;
             height: 100vh;
@@ -111,6 +119,11 @@
             color: #e0e0e0;
             margin-bottom: 20px; /* Space below the class number */
         }
+        .username-display {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
         /* Responsive Design */
         @media (max-width: 768px) {
             .sidebar {
@@ -134,6 +147,9 @@
 </head>
 <body>
 
+
+    <div class="watermark">Watermark text</div>
+
     <div class="sidebar">
         <button class="minimize-btn" onclick="toggleSidebar()"></button>
         <h2>Spidey</h2>
@@ -150,6 +166,9 @@
     </div>
 
     <div class="content">
+        <!-- Display the logged-in username -->
+        <div id="username-display" class="username-display"></div>
+
         <div id="current-class-number" class="current-class-number"></div>
         <!-- Module content -->
         <div id="module1" class="module video-section">
@@ -189,6 +208,19 @@
     </div>
 
     <script>
+	const watermark = document.querySelector('.watermark');
+
+        function moveWatermark() {
+            const x = Math.random() * (window.innerWidth - 200); // Adjust for watermark width
+            const y = Math.random() * (window.innerHeight - 50); // Adjust for watermark height
+
+            watermark.style.left = `${x}px`;
+            watermark.style.top = `${y}px`;
+        }
+
+        setInterval(moveWatermark, 2000); // Move every 2 seconds
+
+
         // Object of access codes with usernames
         const accessCodes = {
             "rihan123": "Rihan",
@@ -211,22 +243,19 @@
             alert("Access denied. Incorrect code.");
             window.location.href = "https://www.example.com"; // Redirect to another page
         } else {
-            alert(`Welcome, ${accessCodes[userCode]}!`); // Display username upon successful entry
+            const userName = accessCodes[userCode]; // Get the username
+            alert(`Welcome, ${userName}!`); // Display username upon successful entry
+            document.getElementById("username-display").textContent = `Logged in as: ${userName}`; // Show the username at the top
+	
+	    // Update the watermark text to the username
+    	    watermark.textContent = userName;
         }
 
         const moduleVideos = {
-            module1: [
-                // Add videos here
-            ],
-            module2: [
-                // Add videos here
-            ],
-            module3: [
-                // Add videos here
-            ],
-            module4: [
-                // Add videos here
-            ],
+            module1: [],
+            module2: [],
+            module3: [],
+            module4: [],
             module5: [
                 { id: '3j6FnCR99Kc', title: 'Class 1' },
                 { id: '7k6ghma44Ck', title: 'Class 2' },
@@ -247,7 +276,7 @@
                 { id: 'P5aMhrRTOtQ', title: 'Class 17' },
                 { id: 'oPqY3ZhX4IM', title: 'Class 18' },
                 { id: 'aWS_XujOD84', title: 'Class 19' },
-                { id: 'Ugtxb-OEA-8', title: 'Class 20' },
+                { id: 'Ugtxb-OEA-8', title: 'Class 20' }
             ],
         };
 
@@ -258,42 +287,44 @@
 
             // Show the selected module
             document.getElementById(moduleId).classList.add('active');
-            loadVideoList(moduleId);
-        }
 
-        function loadVideoList(moduleId) {
+            // Display the video list
             const videoListSection = document.getElementById('video-list-section');
-            videoListSection.innerHTML = ''; // Clear previous list
-            const videos = moduleVideos[moduleId];
+            videoListSection.innerHTML = ''; // Clear previous video list
 
-            if (videos && videos.length > 0) {
-                const videoList = document.createElement('ul');
-                videoList.className = 'video-list';
-                
-                videos.forEach(video => {
+            const videoList = document.createElement('ul');
+            videoList.classList.add('video-list');
+
+            if (moduleVideos[moduleId]) {
+                moduleVideos[moduleId].forEach(video => {
                     const listItem = document.createElement('li');
-                    listItem.innerHTML = `<a href="#" onclick="loadVideo('${video.id}', '${moduleId}')">${video.title}</a>`;
+                    listItem.textContent = video.title;
+                    listItem.onclick = () => {
+                        playVideo(moduleId, video.id);
+                    };
                     videoList.appendChild(listItem);
                 });
-
-                videoListSection.appendChild(videoList);
-            } else {
-                videoListSection.innerHTML = '<p>No videos available for this module.</p>';
             }
+
+            videoListSection.appendChild(videoList);
         }
 
-        function loadVideo(videoId, moduleId) {
+        function playVideo(moduleId, videoId) {
+            // Find the iframe for the given module
             const iframe = document.getElementById(`video-frame-${moduleId}`);
             iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
-        }
 
-        let currentModule = 'module1'; // Set initial module
-        showModule(currentModule); // Load initial module on page load
+            // Highlight the active video in the list
+            const videoListItems = document.querySelectorAll('.video-list li');
+            videoListItems.forEach(item => item.classList.remove('active'));
+            event.target.classList.add('active');
+        }
 
         function toggleSidebar() {
             const sidebar = document.querySelector('.sidebar');
-            const content = document.querySelector('.content');
             sidebar.classList.toggle('minimized');
+
+            const content = document.querySelector('.content');
             content.classList.toggle('sidebar-minimized');
         }
     </script>
