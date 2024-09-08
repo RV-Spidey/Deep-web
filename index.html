@@ -13,13 +13,15 @@
             color: #e0e0e0; /* Light grey text color for contrast */
         }
 	.watermark {
-            position: fixed; /* fixed position to move freely */
-            opacity: 0.5; /* adjust the opacity to your liking */
-            font-size: 24px; /* adjust the font size to your liking */
-            color: #000; /* adjust the color to ensure visibility */
-            transform: rotate(-45deg); /* rotate the watermark for a slanted effect */
-            z-index: 2; /* ensure the watermark is on top */
-        }
+    	position: absolute;
+    	top: 10px;
+    	left: 10px;
+    	color: rgba(255, 255, 255, 0.5); /* White color with 50% opacity */
+    	font-size: 24px; /* Adjust the font size as needed */
+    	pointer-events: none; /* Ensures clicks pass through the watermark */
+    	z-index: 9999; /* Ensures the watermark is on top of other elements */
+}
+
         .sidebar {
             width: 180px;
             height: 100vh;
@@ -218,37 +220,36 @@
             watermark.style.top = `${y}px`;
         }
 
-        setInterval(moveWatermark, 2000); // Move every 2 seconds
+        setInterval(moveWatermark, 20000); // Move every 20seconds
 
 
         // Object of access codes with usernames
         const accessCodes = {
-            "rihan123": "Rihan",
-            "89@52#21*": "Ashly",
-            "jackstevebruce": "Anoop",
-            "code4": "User4",
-            "code5": "User5",
-            "code6": "User6",
-            "code7": "User7",
-            "code8": "User8",
-            "code9": "User9",
-            "code10": "User10",
-            // Add more codes and usernames as needed
+            "rihan123": { username: "Rihan", email: "rihan@example.com" },
+            "89@52#21*": { username: "Ashly", email: "ashly@example.com" },
+            "jackstevebruce": { username: "Anoop", email: "anoop@example.com" },
+            "code4": { username: "User4", email: "user4@example.com" },
+            "code5": { username: "User5", email: "user5@example.com" },
+            "code6": { username: "User6", email: "user6@example.com" },
+            "code7": { username: "User7", email: "user7@example.com" },
+            "code8": { username: "User8", email: "user8@example.com" },
+            "code9": { username: "User9", email: "user9@example.com" },
+            "code10": { username: "User10", email: "user10@example.com" },
+            // Add more codes and users as needed
         };
 
-        // Prompt user for access code
         const userCode = prompt("Enter access code:");
 
         if (!(userCode in accessCodes)) {
             alert("Access denied. Incorrect code.");
             window.location.href = "https://www.example.com"; // Redirect to another page
         } else {
-            const userName = accessCodes[userCode]; // Get the username
-            alert(`Welcome, ${userName}!`); // Display username upon successful entry
-            document.getElementById("username-display").textContent = `Logged in as: ${userName}`; // Show the username at the top
+            const user = accessCodes[userCode]; // Get the user info
+            alert(`Welcome, ${user.username}!`); // Display username upon successful entry
+            document.getElementById("username-display").textContent = `Logged in as: ${user.username}`; // Show the username at the top
 	
-	    // Update the watermark text to the username
-    	    watermark.textContent = userName;
+            // Update the watermark text to the user's email
+            watermark.textContent = user.email;
         }
 
         const moduleVideos = {
