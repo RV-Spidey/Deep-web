@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Background</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Prevent scrolling */
+            background-color: black; /* Set background color to black */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh; /* Full viewport height */
+        }
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80%; /* Set width to 80% of the viewport */
+            height: auto; /* Maintain aspect ratio */
+            max-height: 80%; /* Limit maximum height */
+            transform: translate(-50%, -50%);
+            z-index: -1; /* Send video to the background */
+        }
+        .message {
+            position: relative;
+            z-index: 1; /* Ensure text is above the video */
+            color: red; /* Text color */
+            font-size: 40px; /* Font size */
+            text-align: center; /* Center align text */
+            text-shadow: 
+                0 0 5px black,    /* Black border */
+                0 0 10px red,   /* Black border */
+                0 0 15px darkred, /* Glowing effect */
+                0 0 30px darkred; /* Glowing effect */
+            margin-top: 20px; /* Space between video and text */
+        }
+    </style>
+</head>
+<body>
+    <video autoplay loop muted>
+        <source src="https://raw.githubusercontent.com/RV-Spidey/my-course-page/main/images/spidey%20video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="message">Access Code Wrong</div>
+</body>
+</html>
