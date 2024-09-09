@@ -213,6 +213,15 @@
 </head>
 <body>
 
+	<div id="custom-alert" style="display: none; background-color: #2c2c2c; padding: 20px; border: 1px solid #ccc; width: 300px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+    <p id="message-part1"></p>
+    <p id="message-part2" style="color: red;"></p>
+    <button onclick="closeCustomAlert()">OK</button>
+</div>
+
+
+
+
     <!-- Black overlay -->
     <div id="black-overlay" class="overlay">
         <h1>Enter Access Code</h1>
@@ -278,128 +287,156 @@
     </div>
 
     <script>
-        const watermark = document.querySelector('.watermark');
-        const overlay = document.getElementById("black-overlay");
+    const watermark = document.querySelector('.watermark');
+    const overlay = document.getElementById("black-overlay");
 
-        function moveWatermark() {
-            const x = Math.random() * (window.innerWidth - 200); // Adjust for watermark width
-            const y = Math.random() * (window.innerHeight - 50); // Adjust for watermark height
+    function moveWatermark() {
+        const x = Math.random() * (window.innerWidth - 200); // Adjust for watermark width
+        const y = Math.random() * (window.innerHeight - 50); // Adjust for watermark height
 
-            watermark.style.left = `${x}px`;
-            watermark.style.top = `${y}px`;
-        }
+        watermark.style.left = `${x}px`;
+        watermark.style.top = `${y}px`;
+    }
 
-        setInterval(moveWatermark, 20000); // Move every 20 seconds
+    setInterval(moveWatermark, 20000); // Move every 20 seconds
 
-        // Object of access codes with usernames
-        const accessCodes = {
-            "rihan123": { username: "Rihan", email: "rihan@example.com" },
-            "89@52#21*": { username: "Ashly", email: "ashly@example.com" },
-            "jackstevebruce": { username: "Anoop", email: "anoop@example.com" },
-	    "arjun2005": { username: "Arjun", email: "roy880638@gmail.com" },
-            // Add more codes as needed
+    // Object of access codes with usernames
+    const accessCodes = {
+        "rihan123": { username: "Rihan", email: "rihan@example.com" },
+        "89@52#21*": { username: "Ashly", email: "ashly@example.com" },
+        "jackstevebruce": { username: "Anoop", email: "jackstevebruce@example.com" },
+        "arjun2005": { username: "Arjun", email: "roy880638@gmail.com" },
+        // Add more codes as needed
+    };
+
+    const userCode = prompt("Enter access code:");
+
+    if (!(userCode in accessCodes)) {
+        // Redirect if the code is incorrect
+        window.location.href = "https://rv-spidey.github.io/Deep-web/wrongacess.html";
+    } else {
+        const user = accessCodes[userCode]; // Get the user info
+        //alert(`Hello, ${user.username}!`); // Display username upon successful entry
+        document.getElementById("username-display").textContent = `Logged in as: ${user.username}`; // Show the username at the top
+
+        // Update the watermark text to the user's email
+        watermark.textContent = user.email;
+
+        // Hide the overlay (make the page content visible)
+        overlay.classList.add("hidden");
+
+        // Show the custom alert with the username
+        showCustomAlert(user.username);
+    }
+
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('minimized');
+
+        const content = document.querySelector('.content');
+        content.classList.toggle('sidebar-minimized');
+    }
+
+    function showModule(moduleId) {
+        // Hide all modules
+        const modules = document.querySelectorAll('.video-section');
+        modules.forEach(module => module.classList.remove('active'));
+
+        // Show the selected module
+        document.getElementById(moduleId).classList.add('active');
+
+        // Highlight the active module in the sidebar
+        const moduleLinks = document.querySelectorAll('.module-list li');
+        moduleLinks.forEach(link => link.classList.remove('active'));
+
+        // Display the video list
+        const videoListSection = document.getElementById('video-list-section');
+        videoListSection.innerHTML = ''; // Clear previous video list
+
+        const videoList = document.createElement('ul');
+        videoList.classList.add('video-list');
+
+        const moduleVideos = {
+            module1: [],
+            module2: [],
+            module3: [],
+            module4: [],
+            module5: [
+                { id: '3j6FnCR99Kc', title: 'Class 1' },
+            { id: '7k6ghma44Ck', title: 'Class 2' },
+            { id: 'T13IaHt8dq0', title: 'Class 3' },
+            { id: '5DMGtI9J4HI', title: 'Class 4' },
+            { id: 'I2IA6hyoZhs', title: 'Class 5' },
+            { id: 'Oq2TzoeX2Ro', title: 'Class 6' },
+            { id: 'f6bCgkeyFms', title: 'Class 7' },
+            { id: 'YOv4w70mQVc', title: 'Class 8' },
+            { id: '_RHhaoueXZk', title: 'Class 9' },
+            { id: 'o6sd_qtWhnU', title: 'Class 10' },
+            { id: 'gbDO9CwJmKU', title: 'Class 11' },
+            { id: 'hANZI2mJnsQ', title: 'Class 12' },
+            { id: '3NyGGQ2z4o8', title: 'Class 13' },
+            { id: 'WrfO89n8gkI', title: 'Class 14' },
+            { id: 'gfKWcTFxtnE', title: 'Class 15' },
+            { id: 'WrfO89n8gkI', title: 'Class 16' },
+            { id: 'P5aMhrRTOtQ', title: 'Class 17' },
+            { id: 'oPqY3ZhX4IM', title: 'Class 18' },
+            { id: 'aWS_XujOD84', title: 'Class 19' },
+            { id: 'Ugtxb-OEA-8', title: 'Class 20' },
+                // ...other classes
+            ],
         };
 
-        const userCode = prompt("Enter access code:");
-
-        if (!(userCode in accessCodes)) {
-            //alert("Access denied. Incorrect code.");
-            window.location.href = "https://rv-spidey.github.io/Deep-web/wrongacess.html"; // Redirect to another page
-        } else {
-            const user = accessCodes[userCode]; // Get the user info
-            alert(`Welcome, ${user.username}!`); // Display username upon successful entry
-            document.getElementById("username-display").textContent = `Logged in as: ${user.username}`; // Show the username at the top
-
-            // Update the watermark text to the user's email
-            watermark.textContent = user.email;
-
-            // Hide the overlay (make the page content visible)
-            overlay.classList.add("hidden");
+        if (moduleVideos[moduleId]) {
+            moduleVideos[moduleId].forEach(video => {
+                const listItem = document.createElement('li');
+                listItem.textContent = video.title;
+                listItem.onclick = () => {
+                    playVideo(moduleId, video.id);
+                    highlightClass(listItem);
+                };
+                videoList.appendChild(listItem);
+            });
         }
 
-        function toggleSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('minimized');
+        videoListSection.appendChild(videoList);
+    }
 
-            const content = document.querySelector('.content');
-            content.classList.toggle('sidebar-minimized');
-        }
+    function playVideo(moduleId, videoId) {
+        const iframe = document.getElementById(`video-frame-${moduleId}`);
+        iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
+    }
 
-        function showModule(moduleId) {
-            // Hide all modules
-            const modules = document.querySelectorAll('.video-section');
-            modules.forEach(module => module.classList.remove('active'));
+    function highlightClass(selectedItem) {
+        const classItems = document.querySelectorAll('.video-list li');
+        classItems.forEach(item => item.classList.remove('active'));
 
-            // Show the selected module
-            document.getElementById(moduleId).classList.add('active');
+        // Highlight the selected class
+        selectedItem.classList.add('active');
+    }
 
-	    // Highlight the active module in the sidebar
-    	    const moduleLinks = document.querySelectorAll('.module-list li');
-    	    moduleLinks.forEach(link => link.classList.remove('active'));
+    function showCustomAlert(username) {
+    const messagePart1 = `Hello, ${username}!`;
+    const messagePart2 = 'This website is hosted for educational purposes! Sharing the access code might lead to your Gmail getting compromised.';
 
-            // Display the video list
-            const videoListSection = document.getElementById('video-list-section');
-            videoListSection.innerHTML = ''; // Clear previous video list
+    document.getElementById('message-part1').textContent = messagePart1;
+    document.getElementById('message-part2').textContent = messagePart2;
+    document.getElementById('custom-alert').style.display = 'block';
 
-            const videoList = document.createElement('ul');
-            videoList.classList.add('video-list');
+    // Speak the alert message
+    speakAlertMessage(messagePart1, messagePart2);
+}
+	
+	
+    function speakAlertMessage(part1, part2) {
+    const utterance = new SpeechSynthesisUtterance(`${part1} ${part2}`);
+    utterance.lang = 'en-US'; // Set language
+    speechSynthesis.speak(utterance);
+}
 
-            const moduleVideos = {
-                module1: [],
-                module2: [],
-                module3: [],
-                module4: [],
-                module5: [
-                    { id: '3j6FnCR99Kc', title: 'Class 1' },
-                    { id: '7k6ghma44Ck', title: 'Class 2' },
-                    { id: 'T13IaHt8dq0', title: 'Class 3' },
-                    { id: '5DMGtI9J4HI', title: 'Class 4' },
-                    { id: 'I2IA6hyoZhs', title: 'Class 5' },
-                    { id: 'Oq2TzoeX2Ro', title: 'Class 6' },
-                    { id: 'f6bCgkeyFms', title: 'Class 7' },
-                    { id: 'YOv4w70mQVc', title: 'Class 8' },
-                    { id: '_RHhaoueXZk', title: 'Class 9' },
-                    { id: 'o6sd_qtWhnU', title: 'Class 10' },
-                    { id: 'gbDO9CwJmKU', title: 'Class 11' },
-                    { id: 'hANZI2mJnsQ', title: 'Class 12' },
-                    { id: '3NyGGQ2z4o8', title: 'Class 13' },
-                    { id: 'WrfO89n8gkI', title: 'Class 14' },
-                    { id: 'gfKWcTFxtnE', title: 'Class 15' },
-                    { id: 'WrfO89n8gkI', title: 'Class 16' },
-                    { id: 'P5aMhrRTOtQ', title: 'Class 17' },
-                    { id: 'oPqY3ZhX4IM', title: 'Class 18' },
-                    { id: 'aWS_XujOD84', title: 'Class 19' },
-                    { id: 'Ugtxb-OEA-8', title: 'Class 20' }
-                ],
-            };
+    function closeCustomAlert() {
+    document.getElementById('custom-alert').style.display = 'none';
+}
+</script>
 
-            if (moduleVideos[moduleId]) {
-                moduleVideos[moduleId].forEach(video => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = video.title;
-                    listItem.onclick = () => {
-                        playVideo(moduleId, video.id);
-			highlightClass(listItem);
-                    };
-                    videoList.appendChild(listItem);
-                });
-            }
-
-            videoListSection.appendChild(videoList);
-        }
-
-        function playVideo(moduleId, videoId) {
-            const iframe = document.getElementById(`video-frame-${moduleId}`);
-            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0`;
-        }
-
-	function highlightClass(selectedItem) {
-    const classItems = document.querySelectorAll('.video-list li');
-    classItems.forEach(item => item.classList.remove('active'));
-
-    // Highlight the selected class
-    selectedItem.classList.add('active');
-	}
-    </script>
 </body>
 </html>
